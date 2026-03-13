@@ -1,126 +1,113 @@
 <!DOCTYPE html>
 <html lang="tr">
 <head>
-  <meta charset="UTF-8" />
-  <title>Free Dev Portal - free-for-dev Kaynakları</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="description" content="Ücretsiz geliştirici kaynakları portalı - free-for-dev listesini Türkçe/İngilizce, kategori, akademik not ve gelişmiş arama ile keşfet" />
-  <link rel="stylesheet" href="styles.css" />
+    <meta charset="UTF-8" />
+    <title>Free Dev Portal - Ücretsiz Geliştirici Kaynakları</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="Ücretsiz geliştirici kaynaklarını keşfedin. Türkçe/İngilizce dil desteği, akademik notlar ve gelişmiş filtreleme." />
+    <link rel="stylesheet" href="styles.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 </head>
 <body>
-  <header class="top-bar">
-    <div class="brand">
-      <svg class="brand-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-        <circle cx="12" cy="12" r="10"/>
-        <path d="M12 8v4l3 3"/>
-      </svg>
-      <span>free<span class="accent">·</span>dev<span class="accent">·</span>portal</span>
-    </div>
-    <div class="top-bar-right">
-      <div class="lang-switch">
-        <button data-lang="tr" class="lang-btn active">TR</button>
-        <button data-lang="en" class="lang-btn">EN</button>
-      </div>
-      <a class="source-link" href="https://github.com/ripienaar/free-for-dev" target="_blank" rel="noreferrer">
-        <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor">
-          <path d="M12 2C6.477 2 2 6.477 2 12c0 4.418 2.865 8.165 6.839 9.489.5.092.682-.217.682-.482 0-.237-.008-.866-.013-1.7-2.782.604-3.369-1.341-3.369-1.341-.454-1.155-1.11-1.463-1.11-1.463-.908-.62.069-.608.069-.608 1.003.07 1.531 1.03 1.531 1.03.892 1.529 2.341 1.087 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.026 2.747-1.026.546 1.378.202 2.397.1 2.65.64.699 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12c0-5.523-4.477-10-10-10z"/>
-        </svg>
-        free-for-dev
-      </a>
-    </div>
-  </header>
-
-  <main>
-    <section class="hero">
-      <h1 data-i18n-tr="Ücretsiz Geliştirici Kaynakları" data-i18n-en="Free Developer Resources">Ücretsiz Geliştirici Kaynakları</h1>
-      <p class="subtitle" data-i18n-tr="free-for-dev listesindeki 500+ kaynağı gelişmiş arama, kategori öncelik ve akademik notlarla keşfedin" data-i18n-en="Explore 500+ resources from the free-for-dev list with advanced search, category priority and academic notes">free-for-dev listesindeki 500+ kaynağı gelişmiş arama, kategori öncelik ve akademik notlarla keşfedin</p>
-    </section>
-
-    <section class="filters-container">
-      <div class="search-row">
-        <div class="search-group">
-          <label for="q" data-i18n-tr="Metin Arama" data-i18n-en="Text Search">Metin Arama</label>
-          <div class="search-wrap">
-            <input id="q" type="text" placeholder="isim, açıklama, etiket, URL..." autocomplete="off">
-            <button id="clear-search" class="clear-btn" style="display: none;">&times;</button>
-            <button id="search-btn" class="search-btn" data-i18n-tr="Ara" data-i18n-en="Search">Ara</button>
-          </div>
+    <header class="top-bar">
+        <div class="container">
+            <div class="brand">
+                <svg class="brand-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>
+                </svg>
+                <span class="brand-text">free<span class="dot">.</span>dev<span class="dot">.</span>portal</span>
+            </div>
+            <div class="top-bar-actions">
+                <div class="lang-selector">
+                    <button class="lang-btn active" data-lang="tr">TR</button>
+                    <button class="lang-btn" data-lang="en">EN</button>
+                </div>
+                <a href="https://github.com/ripienaar/free-for-dev" target="_blank" class="github-link" title="Source List">
+                    <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor"><path d="M12 2C6.477 2 2 6.477 2 12c0 4.418 2.865 8.165 6.839 9.489.5.092.682-.217.682-.482 0-.237-.008-.866-.013-1.7-2.782.604-3.369-1.341-3.369-1.341-.454-1.155-1.11-1.463-1.11-1.463-.908-.62.069-.608.069-.608 1.003.07 1.531 1.03 1.531 1.03.892 1.529 2.341 1.087 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.026 2.747-1.026.546 1.378.202 2.397.1 2.65.64.699 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12c0-5.523-4.477-10-10-10z"/></svg>
+                </a>
+            </div>
         </div>
-      </div>
+    </header>
 
-      <div class="filters-grid">
-        <div class="filter-item">
-          <label for="category" data-i18n-tr="Kategori" data-i18n-en="Category">Kategori</label>
-          <select id="category">
-            <option value="all" data-i18n-tr="Tümü" data-i18n-en="All">Tümü</option>
-          </select>
-        </div>
-        <div class="filter-item">
-          <label for="priority" data-i18n-tr="Öncelik" data-i18n-en="Priority">Öncelik</label>
-          <select id="priority">
-            <option value="all" data-i18n-tr="Tümü" data-i18n-en="All">Tümü</option>
-            <option value="1" data-i18n-tr="P1 - Yüksek (Kritik)" data-i18n-en="P1 - High (Critical)">P1 - Yüksek (Kritik)</option>
-            <option value="2" data-i18n-tr="P2 - Orta" data-i18n-en="P2 - Medium">P2 - Orta</option>
-            <option value="3" data-i18n-tr="P3 - Düşük" data-i18n-en="P3 - Low">P3 - Düşük</option>
-          </select>
-        </div>
-        <div class="filter-item">
-          <label for="tags" data-i18n-tr="Etiketler" data-i18n-en="Tags">Etiketler</label>
-          <input id="tags" type="text" placeholder="cloud, api, ml, monitoring...">
-        </div>
-        <div class="filter-item">
-          <label for="sort" data-i18n-tr="Sıralama" data-i18n-en="Sort">Sıralama</label>
-          <select id="sort">
-            <option value="priority" data-i18n-tr="Öncelik > Ad" data-i18n-en="Priority > Name">Öncelik > Ad</option>
-            <option value="name" data-i18n-tr="Ada Göre (A-Z)" data-i18n-en="Name (A-Z)">Ada Göre (A-Z)</option>
-            <option value="category" data-i18n-tr="Kategoriye Göre" data-i18n-en="By Category">Kategoriye Göre</option>
-          </select>
-        </div>
-      </div>
+    <main class="container">
+        <section class="hero">
+            <h1 data-i18n-tr="Geliştiriciler İçin Ücretsiz Kaynaklar" data-i18n-en="Free Resources for Developers">Geliştiriciler İçin Ücretsiz Kaynaklar</h1>
+            <p data-i18n-tr="500'den fazla servisi gelişmiş filtreler ve akademik notlarla keşfedin." data-i18n-en="Explore over 500 services with advanced filters and academic notes.">500'den fazla servisi gelişmiş filtreler ve akademik notlarla keşfedin.</p>
+        </section>
 
-      <div class="checkboxes-row">
-        <label><input type="checkbox" id="no-cc"> <span data-i18n-tr="Kredi kartı yok" data-i18n-en="No credit card">Kredi kartı yok</span></label>
-        <label><input type="checkbox" id="open-source"> <span data-i18n-tr="Açık kaynak" data-i18n-en="Open source">Açık kaynak</span></label>
-        <label><input type="checkbox" id="has-academic"> <span data-i18n-tr="Akademik notu var" data-i18n-en="Has academic notes">Akademik notu var</span></label>
-        <label><input type="checkbox" id="priority-only"> <span data-i18n-tr="Yalnızca öncelikli (P1)" data-i18n-en="Priority only (P1)">Yalnızca öncelikli (P1)</span></label>
-      </div>
+        <aside class="filters-panel">
+            <div class="search-box">
+                <input type="text" id="q" placeholder="Ara: isim, kategori, etiket..." autocomplete="off">
+                <button id="clear-search" class="btn-clear">&times;</button>
+            </div>
 
-      <div class="reset-row">
-        <button id="btn-reset" class="btn-secondary" data-i18n-tr="Filtreleri Sıfırla" data-i18n-en="Reset Filters">Filtreleri Sıfırla</button>
-      </div>
-    </section>
+            <div class="filters-grid">
+                <div class="filter-group">
+                    <label data-i18n-tr="Kategori" data-i18n-en="Category">Kategori</label>
+                    <select id="category">
+                        <option value="all" data-i18n-tr="Tümü" data-i18n-en="All">Tümü</option>
+                    </select>
+                </div>
+                <div class="filter-group">
+                    <label data-i18n-tr="Öncelik" data-i18n-en="Priority">Öncelik</label>
+                    <select id="priority">
+                        <option value="all" data-i18n-tr="Tümü" data-i18n-en="All">Tümü</option>
+                        <option value="1">P1 - High</option>
+                        <option value="2">P2 - Medium</option>
+                        <option value="3">P3 - Low</option>
+                    </select>
+                </div>
+                <div class="filter-group">
+                    <label data-i18n-tr="Sıralama" data-i18n-en="Sort">Sıralama</label>
+                    <select id="sort">
+                        <option value="priority" data-i18n-tr="Öncelik" data-i18n-en="Priority">Öncelik</option>
+                        <option value="name" data-i18n-tr="İsim (A-Z)" data-i18n-en="Name (A-Z)">İsim (A-Z)</option>
+                    </select>
+                </div>
+            </div>
 
-    <div class="results-info">
-      <span id="results-count">0</span>
-      <span id="results-cats"></span>
+            <div class="checkbox-filters">
+                <label><input type="checkbox" id="no-cc"> <span data-i18n-tr="Kredi Kartı İstemeyenler" data-i18n-en="No Credit Card Required">Kredi Kartı İstemeyenler</span></label>
+                <label><input type="checkbox" id="open-source"> <span data-i18n-tr="Açık Kaynak" data-i18n-en="Open Source">Açık Kaynak</span></label>
+                <label><input type="checkbox" id="has-academic"> <span data-i18n-tr="Akademik Notu Olanlar" data-i18n-en="With Academic Notes">Akademik Notu Olanlar</span></label>
+            </div>
+
+            <div class="filters-actions">
+                <button id="btn-reset" class="btn-reset" data-i18n-tr="Filtreleri Temizle" data-i18n-en="Reset Filters">Filtreleri Temizle</button>
+            </div>
+        </aside>
+
+        <div class="results-meta">
+            <span id="results-count">0</span> <span data-i18n-tr="kaynak bulundu" data-i18n-en="resources found">kaynak bulundu</span>
+        </div>
+
+        <div id="results-list" class="results-list"></div>
+
+        <div id="no-results" class="no-results hidden">
+            <div class="empty-icon">🏜️</div>
+            <h2 data-i18n-tr="Sonuç Bulunamadı" data-i18n-en="No Results Found">Sonuç Bulunamadı</h2>
+            <p data-i18n-tr="Farklı anahtar kelimeler veya filtreler kullanmayı deneyin." data-i18n-en="Try using different keywords or filters.">Farklı anahtar kelimeler veya filtreler kullanmayı deneyin.</p>
+        </div>
+
+        <div id="pagination" class="pagination"></div>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <p>Data Source: <a href="https://github.com/ripienaar/free-for-dev" target="_blank">ripienaar/free-for-dev</a></p>
+            <p>&copy; 2026 mserman90 | <span data-i18n-tr="Geliştirici Portalı" data-i18n-en="Developer Portal">Geliştirici Portalı</span></p>
+        </div>
+    </footer>
+
+    <div id="modal-overlay" class="modal-overlay hidden">
+        <div class="modal">
+            <button id="modal-close" class="modal-close">&times;</button>
+            <div id="modal-content"></div>
+        </div>
     </div>
 
-    <section id="results-list" class="grid-view"></section>
-    
-    <div id="no-results" class="no-results hidden">
-      <div class="no-results-icon">🔍</div>
-      <h3 data-i18n-tr="Sonuç bulunamadı" data-i18n-en="No results found">Sonuç bulunamadı</h3>
-      <p data-i18n-tr="Farklı anahtar kelimeler veya filtreler deneyin" data-i18n-en="Try different keywords or filters">Farklı anahtar kelimeler veya filtreler deneyin</p>
-    </div>
-
-    <div id="pagination" class="pagination"></div>
-  </main>
-
-  <footer class="bottom-bar">
-    <div class="footer-info">
-      <span data-i18n-tr="Veri kaynağı:" data-i18n-en="Data source:">Veri kaynağı:</span> 
-      <a href="https://github.com/ripienaar/free-for-dev" target="_blank">ripienaar/free-for-dev</a>
-    </div>
-    <div class="footer-copy">mserman90/free-dev-portal &copy; 2026</div>
-  </footer>
-
-  <div id="modal-overlay" class="modal-overlay hidden">
-    <div class="modal">
-      <button id="modal-close" class="modal-close">&times;</button>
-      <div id="modal-body" class="modal-body"></div>
-    </div>
-  </div>
-
-  <script src="app.js"></script>
+    <script src="app.js"></script>
 </body>
 </html>
