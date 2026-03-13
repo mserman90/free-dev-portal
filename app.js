@@ -11,6 +11,7 @@ async function loadData() {
     const r = await fetch('data/free-for-dev.json'?v=' + Date.now());
     if (!r.ok) throw new Error('Fetch failed: ' + r.status);
     state.data = await r.json();
+        document.getElementById('results-count').textContent = state.data.length + ' DEBUG';
     populateCategories();
     applyFilters();
   } catch (e) {
