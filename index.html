@@ -23,7 +23,7 @@
       </div>
       <a class="source-link" href="https://github.com/ripienaar/free-for-dev" target="_blank" rel="noreferrer">
         <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor">
-          <path d="M12 2C6.477 2 2 6.477 2 12c0 4.418 2.865 8.165 6.839 9.489.5.092.682-.217.682-.482 0-.237-.008-.866-.013-1.7-2.782.604-3.369-1.341-3.369-1.341-.454-1.155-1.11-1.463-1.11-1.463-.908-.62.069-.608.069-.608 1.003.07 1.531 1.03 1.531 1.03.892 1.529 2.341 1.088 2.912.833.091-.647.35-1.088.636-1.338-2.22-.253-4.555-1.11-4.555-4.943 0-1.091.39-1.984 1.029-2.683-.103-.253-.446-1.27.098-2.647 0 0 .84-.269 2.75 1.025A9.563 9.563 0 0 1 12 6.844c.85.004 1.705.115 2.504.337 1.909-1.294 2.747-1.025 2.747-1.025.546 1.377.202 2.394.1 2.647.64.699 1.028 1.592 1.028 2.683 0 3.842-2.337 4.687-4.565 4.935.359.309.678.919.678 1.852 0 1.336-.012 2.415-.012 2.741 0 .267.18.578.688.48A10.004 10.004 0 0 0 22 12c0-5.523-4.477-10-10-10z"/>
+          <path d="M12 2C6.477 2 2 6.477 2 12c0 4.418 2.865 8.165 6.839 9.489.5.092.682-.217.682-.482 0-.237-.008-.866-.013-1.7-2.782.604-3.369-1.341-3.369-1.341-.454-1.155-1.11-1.463-1.11-1.463-.908-.62.069-.608.069-.608 1.003.07 1.531 1.03 1.531 1.03.892 1.529 2.341 1.087 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.026 2.747-1.026.546 1.378.202 2.397.1 2.65.64.699 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12c0-5.523-4.477-10-10-10z"/>
         </svg>
         free-for-dev
       </a>
@@ -36,38 +36,27 @@
       <p class="subtitle" data-i18n-tr="free-for-dev listesindeki 500+ kaynağı gelişmiş arama, kategori öncelik ve akademik notlarla keşfedin" data-i18n-en="Explore 500+ resources from the free-for-dev list with advanced search, category priority and academic notes">free-for-dev listesindeki 500+ kaynağı gelişmiş arama, kategori öncelik ve akademik notlarla keşfedin</p>
     </section>
 
-    <section class="filters-section">
-      <div class="filters">
-        <div class="filter-group search-group">
-          <label data-i18n-tr="Metin Arama" data-i18n-en="Text Search">Metin Arama</label>
+    <section class="filters-container">
+      <div class="search-row">
+        <div class="search-group">
+          <label for="q" data-i18n-tr="Metin Arama" data-i18n-en="Text Search">Metin Arama</label>
           <div class="search-wrap">
-            <svg class="search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
-            <input id="q" type="text" placeholder="isim, açıklama, etiket, URL..." autocomplete="off" />
-                      <button id="search-btn" class="search-btn" data-i18n-tr="Ara" data-i18n-en="Search">
-                                    <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2">
-                                                    <circle cx="11" cy="11" r="8"/>
-                                                    <path d="m21 21-4.35-4.35"/>
-                                                <button id="clear-search" class="clear-btn" aria-label="Clear search" style="display:none;">
-                                                              <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2">
-                                                                              <line x1="18" y1="6" x2="6" y2="18"/>
-                                                                              <line x1="6" y1="6" x2="18" y2="18"/>
-                                                                            </svg>
-                                                            </button>
-                                                  </svg>
-                                    Ara
-                                  </button>
+            <input id="q" type="text" placeholder="isim, açıklama, etiket, URL..." autocomplete="off">
+            <button id="clear-search" class="clear-btn" style="display: none;">&times;</button>
+            <button id="search-btn" class="search-btn" data-i18n-tr="Ara" data-i18n-en="Search">Ara</button>
           </div>
         </div>
+      </div>
 
-        <div class="filter-group">
-          <label data-i18n-tr="Kategori" data-i18n-en="Category">Kategori</label>
+      <div class="filters-grid">
+        <div class="filter-item">
+          <label for="category" data-i18n-tr="Kategori" data-i18n-en="Category">Kategori</label>
           <select id="category">
             <option value="all" data-i18n-tr="Tümü" data-i18n-en="All">Tümü</option>
           </select>
         </div>
-
-        <div class="filter-group">
-          <label data-i18n-tr="Öncelik" data-i18n-en="Priority">Öncelik</label>
+        <div class="filter-item">
+          <label for="priority" data-i18n-tr="Öncelik" data-i18n-en="Priority">Öncelik</label>
           <select id="priority">
             <option value="all" data-i18n-tr="Tümü" data-i18n-en="All">Tümü</option>
             <option value="1" data-i18n-tr="P1 - Yüksek (Kritik)" data-i18n-en="P1 - High (Critical)">P1 - Yüksek (Kritik)</option>
@@ -75,87 +64,62 @@
             <option value="3" data-i18n-tr="P3 - Düşük" data-i18n-en="P3 - Low">P3 - Düşük</option>
           </select>
         </div>
-
-        <div class="filter-group">
-          <label data-i18n-tr="Etiketler (virgülle ayır)" data-i18n-en="Tags (comma separated)">Etiketler</label>
-          <input id="tags" type="text" placeholder="cloud, api, ml, monitoring..." />
+        <div class="filter-item">
+          <label for="tags" data-i18n-tr="Etiketler" data-i18n-en="Tags">Etiketler</label>
+          <input id="tags" type="text" placeholder="cloud, api, ml, monitoring...">
         </div>
-
-        <div class="filter-group">
-          <label data-i18n-tr="Sıralama" data-i18n-en="Sort By">Sıralama</label>
+        <div class="filter-item">
+          <label for="sort" data-i18n-tr="Sıralama" data-i18n-en="Sort">Sıralama</label>
           <select id="sort">
-            <option value="priority" data-i18n-tr="Öncelik &gt; Ad" data-i18n-en="Priority &gt; Name">Öncelik &gt; Ad</option>
+            <option value="priority" data-i18n-tr="Öncelik > Ad" data-i18n-en="Priority > Name">Öncelik > Ad</option>
             <option value="name" data-i18n-tr="Ada Göre (A-Z)" data-i18n-en="Name (A-Z)">Ada Göre (A-Z)</option>
             <option value="category" data-i18n-tr="Kategoriye Göre" data-i18n-en="By Category">Kategoriye Göre</option>
           </select>
         </div>
-
-        <div class="filter-group filter-checks">
-          <label class="check-label">
-            <input type="checkbox" id="no-cc" />
-            <span data-i18n-tr="Kredi kartı yok" data-i18n-en="No credit card">Kredi kartı yok</span>
-          </label>
-          <label class="check-label">
-            <input type="checkbox" id="open-source" />
-            <span data-i18n-tr="Açık kaynak" data-i18n-en="Open source">Açık kaynak</span>
-          </label>
-          <label class="check-label">
-            <input type="checkbox" id="has-academic" />
-            <span data-i18n-tr="Akademik notu var" data-i18n-en="Has academic notes">Akademik notu var</span>
-          </label>
-          <label class="check-label">
-            <input type="checkbox" id="priority-only" />
-            <span data-i18n-tr="Yalnızca öncelikli" data-i18n-en="Priority only">Yalnızca öncelikli (P1)</span>
-          </label>
-        </div>
       </div>
 
-      <div class="filter-actions">
+      <div class="checkboxes-row">
+        <label><input type="checkbox" id="no-cc"> <span data-i18n-tr="Kredi kartı yok" data-i18n-en="No credit card">Kredi kartı yok</span></label>
+        <label><input type="checkbox" id="open-source"> <span data-i18n-tr="Açık kaynak" data-i18n-en="Open source">Açık kaynak</span></label>
+        <label><input type="checkbox" id="has-academic"> <span data-i18n-tr="Akademik notu var" data-i18n-en="Has academic notes">Akademik notu var</span></label>
+        <label><input type="checkbox" id="priority-only"> <span data-i18n-tr="Yalnızca öncelikli (P1)" data-i18n-en="Priority only (P1)">Yalnızca öncelikli (P1)</span></label>
+      </div>
+
+      <div class="reset-row">
         <button id="btn-reset" class="btn-secondary" data-i18n-tr="Filtreleri Sıfırla" data-i18n-en="Reset Filters">Filtreleri Sıfırla</button>
-        <div class="view-toggle">
-          <button id="view-grid" class="view-btn active" title="Grid">
-            <svg viewBox="0 0 24 24" fill="currentColor" width="16" height="16"><rect x="3" y="3" width="8" height="8" rx="1"/><rect x="13" y="3" width="8" height="8" rx="1"/><rect x="3" y="13" width="8" height="8" rx="1"/><rect x="13" y="13" width="8" height="8" rx="1"/></svg>
-          </button>
-          <button id="view-list" class="view-btn" title="List">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16"><line x1="8" y1="6" x2="21" y2="6"/><line x1="8" y1="12" x2="21" y2="12"/><line x1="8" y1="18" x2="21" y2="18"/><line x1="3" y1="6" x2="3.01" y2="6"/><line x1="3" y1="12" x2="3.01" y2="12"/><line x1="3" y1="18" x2="3.01" y2="18"/></svg>
-          </button>
-        </div>
       </div>
     </section>
 
-    <section class="results">
-      <div class="results-meta">
-        <span id="results-count"></span>
-        <span id="results-cats"></span>
-      </div>
-      <div id="results-list" class="results-list grid-view"></div>
-      <div class="pagination" id="pagination"></div>
-    </section>
+    <div class="results-info">
+      <span id="results-count">0</span>
+      <span id="results-cats"></span>
+    </div>
+
+    <section id="results-list" class="grid-view"></section>
+    
+    <div id="no-results" class="no-results hidden">
+      <div class="no-results-icon">🔍</div>
+      <h3 data-i18n-tr="Sonuç bulunamadı" data-i18n-en="No results found">Sonuç bulunamadı</h3>
+      <p data-i18n-tr="Farklı anahtar kelimeler veya filtreler deneyin" data-i18n-en="Try different keywords or filters">Farklı anahtar kelimeler veya filtreler deneyin</p>
+    </div>
+
+    <div id="pagination" class="pagination"></div>
   </main>
-              <div id="no-results" class="no-results" style="display:none;">
-                        <svg viewBox="0 0 24 24" width="48" height="48" fill="none" stroke="currentColor" stroke-width="1.5">
-                                    <circle cx="11" cy="11" r="8"/>
-                                    <path d="m21 21-4.35-4.35"/>
-                                    <line x1="8" y1="11" x2="14" y2="11"/>
-                                  </svg>
-                        <p data-i18n-tr="Sonuç bulunamadı" data-i18n-en="No results found">Sonuç bulunamadı</p>
-                        <p class="no-results-hint" data-i18n-tr="Farklı anahtar kelimeler veya filtreler deneyin" data-i18n-en="Try different keywords or filters">Farklı anahtar kelimeler veya filtreler deneyin</p>
-                      </div>
+
+  <footer class="bottom-bar">
+    <div class="footer-info">
+      <span data-i18n-tr="Veri kaynağı:" data-i18n-en="Data source:">Veri kaynağı:</span> 
+      <a href="https://github.com/ripienaar/free-for-dev" target="_blank">ripienaar/free-for-dev</a>
+    </div>
+    <div class="footer-copy">mserman90/free-dev-portal &copy; 2026</div>
+  </footer>
 
   <div id="modal-overlay" class="modal-overlay hidden">
-    <div class="modal" id="modal">
-      <button class="modal-close" id="modal-close">&times;</button>
-      <div id="modal-body"></div>
+    <div class="modal">
+      <button id="modal-close" class="modal-close">&times;</button>
+      <div id="modal-body" class="modal-body"></div>
     </div>
   </div>
-
-  <footer class="footer">
-    <div class="footer-inner">
-      <span>Veri kaynağı: <a href="https://github.com/ripienaar/free-for-dev" target="_blank" rel="noreferrer">ripienaar/free-for-dev</a></span>
-      <span id="footer-lang"></span>
-      <span>mserman90/free-dev-portal &copy; 2026</span>
-    </div>
-  </footer>
 
   <script src="app.js"></script>
 </body>
