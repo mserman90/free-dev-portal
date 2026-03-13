@@ -8,7 +8,7 @@ const state = {
 
 async function loadData() {
   try {
-    const r = await fetch('data/free-for-dev.json');
+    const r = await fetch('data/free-for-dev.json'?v=' + Date.now());
     if (!r.ok) throw new Error('Fetch failed: ' + r.status);
     state.data = await r.json();
     populateCategories();
