@@ -47,6 +47,12 @@
                                     <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2">
                                                     <circle cx="11" cy="11" r="8"/>
                                                     <path d="m21 21-4.35-4.35"/>
+                                                <button id="clear-search" class="clear-btn" aria-label="Clear search" style="display:none;">
+                                                              <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2">
+                                                                              <line x1="18" y1="6" x2="6" y2="18"/>
+                                                                              <line x1="6" y1="6" x2="18" y2="18"/>
+                                                                            </svg>
+                                                            </button>
                                                   </svg>
                                     Ara
                                   </button>
@@ -126,6 +132,15 @@
       <div class="pagination" id="pagination"></div>
     </section>
   </main>
+              <div id="no-results" class="no-results" style="display:none;">
+                        <svg viewBox="0 0 24 24" width="48" height="48" fill="none" stroke="currentColor" stroke-width="1.5">
+                                    <circle cx="11" cy="11" r="8"/>
+                                    <path d="m21 21-4.35-4.35"/>
+                                    <line x1="8" y1="11" x2="14" y2="11"/>
+                                  </svg>
+                        <p data-i18n-tr="Sonuç bulunamadı" data-i18n-en="No results found">Sonuç bulunamadı</p>
+                        <p class="no-results-hint" data-i18n-tr="Farklı anahtar kelimeler veya filtreler deneyin" data-i18n-en="Try different keywords or filters">Farklı anahtar kelimeler veya filtreler deneyin</p>
+                      </div>
 
   <div id="modal-overlay" class="modal-overlay hidden">
     <div class="modal" id="modal">
