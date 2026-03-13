@@ -91,6 +91,7 @@ function populateCategories() {
   const cats = new Set();
   state.data.forEach(e => { if (e.category) cats.add(e.category); });
   const sorted = Array.from(cats).sort();
+  const currentVal = select.value;
   select.innerHTML = `<option value="all">${state.lang === 'tr' ? 'Tümü' : 'All'}</option>`;
   sorted.forEach(cat => {
     const opt = document.createElement('option');
@@ -98,6 +99,9 @@ function populateCategories() {
     opt.textContent = cat;
     select.appendChild(opt);
   });
+  if (Array.from(select.options).some(o => o.value === currentVal)) {
+    select.value = currentVal;
+  }
 }
 
 function renderResults() {
@@ -116,8 +120,7 @@ function renderResults() {
   emptyEl.classList.add('hidden');
 
   const start = (state.page - 1) * state.perPage;
-  const end = state.page * state.perPage;
-  const pageItems = state.filtered.slice(start, end);
+  const pageItems = state.filtered.slice(start, start + state.perPage);
 
   pageItems.forEach(entry => {
     const card = document.createElement('article');
@@ -131,16 +134,21 @@ function renderResults() {
     card.innerHTML = \`
       <div class="card-header">
         <h3 class="card-title"><a href="\${entry.url}" target="_blank">\${entry.name}</a></h3>
-        <span class="category-badge">\${entry.category}</span>
+        <span class="card-category">\${entry.category}</span>
       </div>
       <p class="card-desc">\${desc || ''}</p>
-      \${entry.free_tier_summary ? \`<div class="free-tier">\${entry.free_tier_summary}</div>\` : ''}
+      \${entry.free_tier_summary ? \`<div class="card-tier">\${entry.free_tier_summary}</div>\` : ''}
       <div class="card-tags">\${tagsHtml}</div>
-      <div class="card-meta">
-        \${entry.priority ? \`<span class="badge priority">P\${entry.priority}</span>\` : ''}
-        \${entry.requires_credit_card === false ? \`<span class="badge no-cc">\${state.lang === 'tr' ? 'KK Yok' : 'No CC'}</span>\` : ''}
-        \${entry.is_open_source === true ? \`<span class="badge oss">OSS</span>\` : ''}
-        \${entry.academic_notes ? \`<span class="badge academic">🎓</span>\` : ''}
+      \${entry.academic_notes ? \`
+        <div class="card-notes">
+          <span class="notes-label">\${state.lang === 'tr' ? 'Akademik Notlar' : 'Academic Notes'}</span>
+          \${entry.academic_notes}
+        </div>
+      \` : ''}
+      <div class="card-badges">
+        \${entry.priority ? \`<span class="badge badge-p\${entry.priority}">P\${entry.priority}</span>\` : ''}
+        \${entry.requires_credit_card === false ? \`<span class="badge badge-no-cc">\${state.lang === 'tr' ? 'KK Yok' : 'No CC'}</span>\` : ''}
+        \${entry.is_open_source === true ? \`<span class="badge badge-oss">OSS</span>\` : ''}
       </div>
       <div class="card-footer">
         <span class="hostname">\${hostname}</span>
@@ -163,14 +171,14 @@ window.showModalById = (id) => {
   
   content.innerHTML = \`
     <h2>\${entry.name}</h2>
-    <div class="modal-body">
+    <div class="modal-body" style="margin-top: 1.5rem; display: flex; flex-direction: column; gap: 1rem;">
       <p><strong>URL:</strong> <a href="\${entry.url}" target="_blank">\${entry.url}</a></p>
       <p><strong>\${state.lang === 'tr' ? 'Açıklama' : 'Description'}:</strong> \${desc}</p>
       \${entry.free_tier_summary ? \`<p><strong>\${state.lang === 'tr' ? 'Ücretsiz Katman' : 'Free Tier'}:</strong> \${entry.free_tier_summary}</p>\` : ''}
-      \${entry.academic_notes ? \`<div class="academic-notes"><strong>\${state.lang === 'tr' ? 'Akademik Notlar' : 'Academic Notes'}:</strong><br>\${entry.academic_notes}</div>\` : ''}
+      \${entry.academic_notes ? \`<div class=\"card-notes\"><span class=\"notes-label\">\${state.lang === 'tr' ? 'Akademik Notlar' : 'Academic Notes'}</span>\${entry.academic_notes}</div>\` : ''}
       \${entry.usage_examples ? \`
-        <div class="usage-examples">
-          <strong>\${state.lang === 'tr' ? 'Örnek Kullanım' : 'Usage Examples'}:</strong>
+        <div>
+          <strong>\${state.lang === 'tr' ? 'Örnek Kullanımlar' : 'Usage Examples'}:</strong>
           <ul>\${entry.usage_examples.map(ex => \`<li>\${ex}</li>\`).join('')}</ul>
         </div>
       \` : ''}
@@ -224,7 +232,18 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   const qInput = document.getElementById('q');
-  qInput?.addEventListener('input', applyFilters);
+  const clearBtn = document.getElementById('clear-search');
+  
+  qInput?.addEventListener('input', () => {
+    if (clearBtn) clearBtn.style.display = qInput.value ? 'block' : 'none';
+    applyFilters();
+  });
+
+  clearBtn?.addEventListener('click', () => {
+    qInput.value = '';
+    clearBtn.style.display = 'none';
+    applyFilters();
+  });
 
   ['category', 'priority', 'sort', 'no-cc', 'open-source', 'has-academic'].forEach(id => {
     document.getElementById(id)?.addEventListener('change', applyFilters);
@@ -232,6 +251,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   document.getElementById('btn-reset')?.addEventListener('click', () => {
     if (qInput) qInput.value = '';
+    if (clearBtn) clearBtn.style.display = 'none';
     ['category', 'priority'].forEach(id => {
       const el = document.getElementById(id);
       if (el) el.value = 'all';
