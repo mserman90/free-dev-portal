@@ -223,5 +223,51 @@
     "is_open_source": false,
     "academic_notes": "Mobil uygulama geliştiren öğrenciler için en kolay başlangıç.",
     "usage_examples": ["Push notification gönder.", "Realtime Database kullan."]
+  },
+  {
+    "id": "gee",
+    "name": "Google Earth Engine",
+    "url": "https://earthengine.google.com/",
+    "category": "Geospatial & Data",
+    "priority": 1,
+    "description_tr": "Dünya çapında uydu görüntülerini ve verileri analiz etmek için kullanılan bulut tabanlı bir platform.",
+    "description_en": "A cloud-based platform for planetary-scale geospatial analysis.",
+    "tags": ["gis", "remotesensing", "data", "satellite", "earth-observation"],
+    "free_tier_summary": "Akademik ve ticari olmayan kullanımlar için ücretsiz.",
+    "requires_credit_card": false,
+    "is_open_source": false,
+    "academic_notes": "Su kaynakları yönetimi ve çevresel risk analizi için vazgeçilmez bir araç. NDVI ve su indeksi hesaplamaları için kullan.",
+    "usage_examples": ["Havza bazlı arazi örtüsü değişimi analizi yap.", "Kuraklık izleme için MODIS verilerini işle."]
+  },
+  {
+    "id": "wri-aqueduct",
+    "name": "WRI Aqueduct",
+    "url": "https://www.wri.org/aqueduct",
+    "category": "Environmental Analysis",
+    "priority": 2,
+    "description_tr": "Küresel su risklerini haritalamak ve analiz etmek için kullanılan bir araç seti.",
+    "description_en": "Tools to map and analyze global water risks.",
+    "tags": ["water", "risk", "maps", "environment"],
+    "free_tier_summary": "Ücretsiz halka açık veri ve araçlar.",
+    "requires_credit_card": false,
+    "is_open_source": true,
+    "academic_notes": "Su stresi ve taşkın riski değerlendirmeleri için standart veri seti. NATO standartlarında raporlama için kullanılabilir.",
+    "usage_examples": ["Bölgesel su stresi haritaları oluştur.", "İklim değişikliği senaryolarına göre taşkın riski tahmini yap."]
+  },
+  {
+    "id": "mapbox",
+    "name": "Mapbox",
+    "url": "https://www.mapbox.com/",
+    "category": "Geospatial & Data",
+    "priority": 1,
+    "description_tr": "Özel haritalar ve konum tabanlı uygulamalar oluşturmak için geliştirici platformu.",
+    "description_en": "Developer platform for custom maps and location-based experiences.",
+    "tags": ["maps", "gis", "api", "visualization"],
+    "free_tier_summary": "Cömert ücretsiz katman: 25,000 aylık aktif kullanıcı ve ücretsiz harita yüklemeleri.",
+    "requires_credit_card": true,
+    "is_open_source": false,
+    "academic_notes": "Gelişmiş veri görselleştirme ve web haritalama projeleri için ideal.",
+    "usage_examples": ["Etkileşimli su kalitesi izleme haritası geliştir.", "Gerçek zamanlı sensör verilerini harita üzerinde göster."]
   }
+]
 ]
