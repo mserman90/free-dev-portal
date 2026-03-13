@@ -40,3 +40,74 @@
     width: 16px;
     height: 16px;
   }
+
+
+/* Clear search button */
+.clear-btn {
+      position: absolute;
+      right: 10px;
+      top: 50%;
+      transform: translateY(-50%);
+      background: transparent;
+      border: none;
+      cursor: pointer;
+      padding: 4px;
+      color: var(--text-muted);
+      transition: var(--transition);
+      opacity: 0.6;
+    }
+
+.clear-btn:hover {
+      opacity: 1;
+      color: var(--accent);
+    }
+
+/* Search input wrapper needs relative positioning for clear button */
+.search-wrap > input {
+      position: relative;
+      padding-right: 35px;
+    }
+
+/* No results message */
+.no-results {
+      text-align: center;
+      padding: 4rem 2rem;
+      color: var(--text-muted);
+    }
+
+.no-results svg {
+      opacity: 0.4;
+      margin-bottom: 1rem;
+    }
+
+.no-results p {
+      font-size: 1.1rem;
+      margin: 0.5rem 0;
+    }
+
+.no-results-hint {
+      font-size: 0.9rem !important;
+      color: var(--text-dim) !important;
+    }
+
+/* Input focus effect */
+#q:focus {
+      outline: none;
+      border-color: var(--accent);
+      box-shadow: 0 0 0 3px var(--accent-soft);
+    }
+
+/* Fade-in animation */
+@keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+.card {
+      animation: fadeIn 0.3s ease-out;
+    }
+
+/* Smooth scroll */
+html {
+      scroll-behavior: smooth;
+    }
