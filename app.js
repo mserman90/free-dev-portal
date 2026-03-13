@@ -8,15 +8,15 @@ const state = {
 
 async function loadData() {
   try {
-    const r = await fetch('./data/free-for-dev.json');
-    if (!r.ok) throw new Error('Fetch failed');
+    const r = await fetch('data/free-for-dev.json');
+    if (!r.ok) throw new Error('Fetch failed: ' + r.status);
     state.data = await r.json();
     populateCategories();
     applyFilters();
   } catch (e) {
     console.error('Data error:', e);
     const list = document.getElementById('results-list');
-    if (list) list.innerHTML = '<p style="color:red;padding:2rem;text-align:center;">Veri yüklenemedi. Lütfen sayfayı yenileyin.</p>';
+    if (list) list.innerHTML = `<p style="color:red;padding:2rem;text-align:center;">Veri yüklenemedi. Hata: ${e.message}</p>`;
   }
 }
 
@@ -50,29 +50,12 @@ function applyFilters() {
   const filters = getFilters();
   let items = [...state.data];
 
-  if (filters.q) {
-    items = items.filter(e => matchesText(e, filters.q));
-  }
-
-  if (filters.category !== 'all') {
-    items = items.filter(e => e.category === filters.category);
-  }
-
-  if (filters.priority !== 'all') {
-    items = items.filter(e => String(e.priority) === String(filters.priority));
-  }
-
-  if (filters.noCC) {
-    items = items.filter(e => e.requires_credit_card === false);
-  }
-
-  if (filters.openSource) {
-    items = items.filter(e => e.is_open_source === true);
-  }
-
-  if (filters.hasAcademic) {
-    items = items.filter(e => e.academic_notes && e.academic_notes.length > 0);
-  }
+  if (filters.q) items = items.filter(e => matchesText(e, filters.q));
+  if (filters.category !== 'all') items = items.filter(e => e.category === filters.category);
+  if (filters.priority !== 'all') items = items.filter(e => String(e.priority) === String(filters.priority));
+  if (filters.noCC) items = items.filter(e => e.requires_credit_card === false);
+  if (filters.openSource) items = items.filter(e => e.is_open_source === true);
+  if (filters.hasAcademic) items = items.filter(e => e.academic_notes && e.academic_notes.length > 0);
 
   if (filters.sort === 'priority') {
     items.sort((a, b) => (a.priority ?? 99) - (b.priority ?? 99) || a.name.localeCompare(b.name));
@@ -99,9 +82,7 @@ function populateCategories() {
     opt.textContent = cat;
     select.appendChild(opt);
   });
-  if (Array.from(select.options).some(o => o.value === currentVal)) {
-    select.value = currentVal;
-  }
+  if (Array.from(select.options).some(o => o.value === currentVal)) select.value = currentVal;
 }
 
 function renderResults() {
@@ -136,15 +117,9 @@ function renderResults() {
         <h3 class="card-title"><a href="\${entry.url}" target="_blank">\${entry.name}</a></h3>
         <span class="card-category">\${entry.category}</span>
       </div>
-      <p class="card-desc">\${desc || ''}</p>
-      \${entry.free_tier_summary ? \`<div class="card-tier">\${entry.free_tier_summary}</div>\` : ''}
+      <p class="card-desc">\${desc || ''}</p>\${entry.free_tier_summary ? \`<div class="card-tier">\${entry.free_tier_summary}</div>\` : ''}
       <div class="card-tags">\${tagsHtml}</div>
-      \${entry.academic_notes ? \`
-        <div class="card-notes">
-          <span class="notes-label">\${state.lang === 'tr' ? 'Akademik Notlar' : 'Academic Notes'}</span>
-          \${entry.academic_notes}
-        </div>
-      \` : ''}
+      \${entry.academic_notes ? \`<div class="card-notes"><span class="notes-label">\${state.lang === 'tr' ? 'Akademik Notlar' : 'Academic Notes'}</span>\${entry.academic_notes}</div>\` : ''}
       <div class="card-badges">
         \${entry.priority ? \`<span class="badge badge-p\${entry.priority}">P\${entry.priority}</span>\` : ''}
         \${entry.requires_credit_card === false ? \`<span class="badge badge-no-cc">\${state.lang === 'tr' ? 'KK Yok' : 'No CC'}</span>\` : ''}
@@ -152,11 +127,8 @@ function renderResults() {
       </div>
       <div class="card-footer">
         <span class="hostname">\${hostname}</span>
-        <button class="btn-details" onclick="window.showModalById('\${entry.id || entry.name}')">
-          \${state.lang === 'tr' ? 'Detaylar' : 'Details'}
-        </button>
-      </div>
-    \`;
+        <button class="btn-details" onclick="window.showModalById('\${entry.id || entry.name}')">\${state.lang === 'tr' ? 'Detaylar' : 'Details'}</button>
+      </div>\`;
     list.appendChild(card);
   });
   renderPagination();
@@ -176,14 +148,8 @@ window.showModalById = (id) => {
       <p><strong>\${state.lang === 'tr' ? 'Açıklama' : 'Description'}:</strong> \${desc}</p>
       \${entry.free_tier_summary ? \`<p><strong>\${state.lang === 'tr' ? 'Ücretsiz Katman' : 'Free Tier'}:</strong> \${entry.free_tier_summary}</p>\` : ''}
       \${entry.academic_notes ? \`<div class=\"card-notes\"><span class=\"notes-label\">\${state.lang === 'tr' ? 'Akademik Notlar' : 'Academic Notes'}</span>\${entry.academic_notes}</div>\` : ''}
-      \${entry.usage_examples ? \`
-        <div>
-          <strong>\${state.lang === 'tr' ? 'Örnek Kullanımlar' : 'Usage Examples'}:</strong>
-          <ul>\${entry.usage_examples.map(ex => \`<li>\${ex}</li>\`).join('')}</ul>
-        </div>
-      \` : ''}
-    </div>
-  \`;
+      \${entry.usage_examples ? \`<div><strong>\${state.lang === 'tr' ? 'Örnek Kullanımlar' : 'Usage Examples'}:</strong><ul>\${entry.usage_examples.map(ex => \`<li>\${ex}</li>\`).join('')}</ul></div>\` : ''}
+    </div>\`;
   overlay.classList.remove('hidden');
 };
 
@@ -193,18 +159,15 @@ function renderPagination() {
   pag.innerHTML = '';
   const total = Math.ceil(state.filtered.length / state.perPage);
   if (total <= 1) return;
-
   const prev = document.createElement('button');
   prev.innerHTML = '&lsaquo;';
   prev.disabled = state.page === 1;
   prev.onclick = () => { state.page--; renderResults(); window.scrollTo({top:0, behavior:'smooth'}); };
   pag.appendChild(prev);
-
   const span = document.createElement('span');
   span.className = 'page-info';
   span.textContent = \`\${state.page} / \${total}\`;
   pag.appendChild(span);
-
   const next = document.createElement('button');
   next.innerHTML = '&rsaquo;';
   next.disabled = state.page === total;
@@ -219,60 +182,31 @@ function updateLanguage(lang) {
     el.textContent = lang === 'tr' ? el.getAttribute('data-i18n-tr') : el.getAttribute('data-i18n-en');
   });
   const qInput = document.getElementById('q');
-  if (qInput) {
-    qInput.placeholder = lang === 'tr' ? 'Ara: isim, kategori, etiket...' : 'Search: name, category, tag...';
-  }
+  if (qInput) qInput.placeholder = lang === 'tr' ? 'Ara: isim, kategori, etiket...' : 'Search: name, category, tag...';
   populateCategories();
   applyFilters();
 }
 
 document.addEventListener('DOMContentLoaded', () => {
-  document.querySelectorAll('.lang-btn').forEach(b => {
-    b.addEventListener('click', () => updateLanguage(b.dataset.lang));
-  });
-
+  document.querySelectorAll('.lang-btn').forEach(b => b.addEventListener('click', () => updateLanguage(b.dataset.lang)));
   const qInput = document.getElementById('q');
   const clearBtn = document.getElementById('clear-search');
-  
   qInput?.addEventListener('input', () => {
     if (clearBtn) clearBtn.style.display = qInput.value ? 'block' : 'none';
     applyFilters();
   });
-
-  clearBtn?.addEventListener('click', () => {
-    qInput.value = '';
-    clearBtn.style.display = 'none';
-    applyFilters();
-  });
-
-  ['category', 'priority', 'sort', 'no-cc', 'open-source', 'has-academic'].forEach(id => {
-    document.getElementById(id)?.addEventListener('change', applyFilters);
-  });
-
+  clearBtn?.addEventListener('click', () => { qInput.value = ''; clearBtn.style.display = 'none'; applyFilters(); });
+  ['category', 'priority', 'sort', 'no-cc', 'open-source', 'has-academic'].forEach(id => document.getElementById(id)?.addEventListener('change', applyFilters));
   document.getElementById('btn-reset')?.addEventListener('click', () => {
     if (qInput) qInput.value = '';
     if (clearBtn) clearBtn.style.display = 'none';
-    ['category', 'priority'].forEach(id => {
-      const el = document.getElementById(id);
-      if (el) el.value = 'all';
-    });
+    ['category', 'priority'].forEach(id => { const el = document.getElementById(id); if (el) el.value = 'all'; });
     const sort = document.getElementById('sort');
     if (sort) sort.value = 'priority';
-    ['no-cc', 'open-source', 'has-academic'].forEach(id => {
-      const el = document.getElementById(id);
-      if (el) el.checked = false;
-    });
+    ['no-cc', 'open-source', 'has-academic'].forEach(id => { const el = document.getElementById(id); if (el) el.checked = false; });
     applyFilters();
   });
-
-  document.getElementById('modal-close')?.addEventListener('click', () => {
-    document.getElementById('modal-overlay').classList.add('hidden');
-  });
-
-  window.addEventListener('click', (e) => {
-    const overlay = document.getElementById('modal-overlay');
-    if (e.target === overlay) overlay.classList.add('hidden');
-  });
-
+  document.getElementById('modal-close')?.addEventListener('click', () => document.getElementById('modal-overlay').classList.add('hidden'));
+  window.addEventListener('click', (e) => { const overlay = document.getElementById('modal-overlay'); if (e.target === overlay) overlay.classList.add('hidden'); });
   loadData();
 });
